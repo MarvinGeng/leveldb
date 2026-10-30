@@ -31,6 +31,8 @@ else (WIN32)
 endif (WIN32)
 
 option(LEVELDB_BUILD_TESTS "Build LevelDB's unit tests" ON)
+option(LEVELDB_BUILD_INTEGRATION_TESTS
+       "Build LevelDB's self-contained public API integration tests" ON)
 option(LEVELDB_BUILD_BENCHMARKS "Build LevelDB's benchmarks" ON)
 option(LEVELDB_INSTALL "Install LevelDB's header and library" ON)
 
@@ -403,6 +405,11 @@ if(LEVELDB_BUILD_TESTS)
     endif (WIN32)
   endif(NOT BUILD_SHARED_LIBS)
 endif(LEVELDB_BUILD_TESTS)
+
+if(LEVELDB_BUILD_INTEGRATION_TESTS)
+  enable_testing()
+  add_subdirectory("test")
+endif(LEVELDB_BUILD_INTEGRATION_TESTS)
 
 if(LEVELDB_BUILD_BENCHMARKS)
   # This project uses Google benchmark for benchmarking.
